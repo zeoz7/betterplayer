@@ -1,0 +1,63 @@
+diff --git a/lib/src/hls/hls_parser/drm_init_data.dart b/lib/src/hls/hls_parser/drm_init_data.dart
+index 1234567..89abcde 100644
+--- a/lib/src/hls/hls_parser/drm_init_data.dart
++++ b/lib/src/hls/hls_parser/drm_init_data.dart
+@@ -19,7 +19,8 @@ class DrmInitData {
+   final SchemeData schemeData;
+
+   @override
+-  int get hashCode => hashValues(schemeType, schemeData);
++  int get hashCode => Object.hash(schemeType, schemeData);
+ }
+
+diff --git a/lib/src/hls/hls_parser/hls_track_metadata_entry.dart b/lib/src/hls/hls_parser/hls_track_metadata_entry.dart
+index 2345678..90abcdef 100644
+--- a/lib/src/hls/hls_parser/hls_track_metadata_entry.dart
++++ b/lib/src/hls/hls_parser/hls_track_metadata_entry.dart
+@@ -28,7 +28,9 @@ class HlsTrackMetadataEntry {
+   final List<VariantInfo> variantInfos;
+
+   @override
+-  int get hashCode => hashValues(groupId, name, variantInfos);
++  int get hashCode =>
++      Object.hash(groupId, name, Object.hashAll(variantInfos));
+ }
+
+diff --git a/lib/src/hls/hls_parser/scheme_data.dart b/lib/src/hls/hls_parser/scheme_data.dart
+index 3456789..abcdef01 100644
+--- a/lib/src/hls/hls_parser/scheme_data.dart
++++ b/lib/src/hls/hls_parser/scheme_data.dart
+@@ -49,7 +49,11 @@ class SchemeData {
+   final bool requiresSecureDecryption;
+
+   @override
+-  int get hashCode => hashValues(
+-      mimeType, licenseServerUrl, data, requiresSecureDecryption);
++  int get hashCode => Object.hash(
++      mimeType,
++      licenseServerUrl,
++      data,
++      requiresSecureDecryption);
+ }
+
+diff --git a/lib/src/hls/hls_parser/variant_info.dart b/lib/src/hls/hls_parser/variant_info.dart
+index 4567890..abcdef12 100644
+--- a/lib/src/hls/hls_parser/variant_info.dart
++++ b/lib/src/hls/hls_parser/variant_info.dart
+@@ -41,7 +41,15 @@ class VariantInfo {
+   final String? closedCaptionsGroupId;
+
+   @override
+-  int get hashCode => hashValues(
+-      bandwidth, averageBitrate, codecs, resolution, frameRate,
+-      audioGroupId, subtitleGroupId, closedCaptionsGroupId);
++  int get hashCode => Object.hash(
++      bandwidth,
++      averageBitrate,
++      codecs,
++      resolution,
++      frameRate,
++      audioGroupId,
++      subtitleGroupId,
++      closedCaptionsGroupId);
+ }
